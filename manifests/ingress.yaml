@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: naro-vorn9061-gitlab-spring-new-https-ingress
+  namespace: naro-vorn9061-gitlab-spring-new
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - naro-vorn9061-gitlab-spring-new.assessify.org
+      secretName: naro-vorn9061-gitlab-spring-new-secret-tls
+  rules:
+    - host: naro-vorn9061-gitlab-spring-new.assessify.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: naro-vorn9061-gitlab-spring-new-service
+                port:
+                  number: 8294
