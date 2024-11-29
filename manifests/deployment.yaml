@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: naro-vorn9061-gitlab-spring-new-deployment
+  labels:
+    app: naro-vorn9061-gitlab-spring-new
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: naro-vorn9061-gitlab-spring-new
+  template:
+    metadata:
+      labels:
+        app: naro-vorn9061-gitlab-spring-new
+    spec:
+      containers:
+        - name: naro-vorn9061-gitlab-spring-new-container
+          image: pipejet/naro-vorn9061-gitlab-spring-new:0
+          ports:
+            - containerPort: 8080
